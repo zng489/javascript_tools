@@ -1,0 +1,46 @@
+npm install tesseract.js
+
+
+
+
+// textRecognizer.js
+
+const { createWorker } = require('tesseract.js');
+const fs = require('fs');
+const path = require('path');
+
+async function recognizeText(imagePath) {
+  const worker = await createWorker('eng');
+
+  try {
+    // Read the image file as a buffer
+    const imageBuffer = fs.readFileSync(imagePath);
+    
+    const { data: { text } } = await worker.recognize(imageBuffer);
+    return text;
+  } catch (error) {
+    console.error('Error recognizing text:', error);
+  } finally {
+    await worker.terminate();
+  }
+}
+
+// Update this path to your image file
+const imagePath = path.join('C:', 'Users', 'PC', 'Desktop', 'foto_1.png');
+recognizeText(imagePath).then((text) => {
+  console.log(text); // Output the recognized text
+});
+
+module.exports = recognizeText; // Export the function
+
+function greeting(name) {
+  return `Hello, ${name}!`;
+}
+
+async function main() {
+  const message = await greeting('Alice');
+  console.log(message); // Output: Hello, Alice!
+}
+
+// Call the main function
+main();
