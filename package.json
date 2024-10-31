@@ -1,7 +1,5 @@
 {
   "dependencies": {
-    "dataframe-js": "^1.4.4",
-    "json2csv": "^6.0.0-alpha.2",
-    "node-fetch": "^2.7.0"
+    "tesseract.js": "^5.1.1"
   }
 }
